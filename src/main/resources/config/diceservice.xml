@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Bean Configuration File  : bean 설정문서 : bean 객체를 생성하기 위한 주문서  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+												 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+												 
+    <bean id="diceA" class="spring.service.dice.impl.DiceAImpl"></bean>
+    <bean id="diceB" class="spring.service.dice.impl.DiceBImpl"></bean>
+    <bean id="diceC" class="spring.service.dice.impl.DiceCImpl"></bean>
+    
+    <!-- player01은 DiceAImpl 가지고 논다 setter로 주입 -->
+    <!-- player01.setDice(DiceAImpl dice)와 동일 -->
+    <bean id="player01" class="spring.service.dice.play.Player02">
+    	<property name="dice" ref ="diceA" ></property>   <!-- 설정문서에서는 실제 어떤 주사위를 가지고 놀지 적어주는 것 -->
+    	<!-- property 는 setter로 사용할 때 씀 / diceA라는 bean 을 참조할 때는 ref사용-->
+    </bean>
+    
+    <!-- player02은 DiceBImpl 가지고 논다 setter로 주입 -->
+    <!-- player01.setDice(DiceAImpl dice)와 동일 -->
+    <bean id="player02" class="spring.service.dice.play.Player02">
+    	<property name="dice" ref ="diceB" ></property>
+    </bean>
+    
+    <!-- player03은 DiceCImpl 가지고 논다 생성자로 주입 -->
+    <bean id="player03" class="spring.service.dice.play.Player02">
+    	<constructor-arg ref="diceC"></constructor-arg>
+    </bean>
+    
+    <!-- player03은 DiceAImpl 가지고 논다 setter로 주입 -->
+    <bean id="player04" class="spring.service.dice.play.Player02">
+    	<constructor-arg ref="diceA"></constructor-arg>
+    </bean>
+</beans>
